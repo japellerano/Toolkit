@@ -47,7 +47,7 @@ def create_project(project_name, directories, partials, sass, js)
   # Create Sub-Directories
   directories.each do |d|
     Dir.mkdir(d, 0755)
-    puts "Creating #{d}..."
+    puts "Creating #{d}/..."
   end
 
   # Create partials
@@ -56,8 +56,9 @@ def create_project(project_name, directories, partials, sass, js)
     FileUtils.touch(s)
     puts "Creating #{s}"
   end
+  puts "Fetching master.scss..."
   get_files("master")
-  puts File.exist?("master.scss")
+  # puts File.exist?("master.scss")
   # puts Dir.getwd
   Dir.mkdir("partials")
   Dir.chdir("partials")
@@ -70,8 +71,11 @@ def create_project(project_name, directories, partials, sass, js)
 
   # Create Files in Main Directory
   FileUtils.touch('README.MD') # README
+  puts "Fetching .gitignore"
   get_files("gitignore")
+  puts "Fetching index.html"
   get_files("index")
+  puts "Fetching config.rb"
   get_files("config")
 
   Dir.chdir("js")
@@ -79,11 +83,18 @@ def create_project(project_name, directories, partials, sass, js)
     FileUtils.touch(j)
     puts "Creating #{j}"
   end
+  puts "Fetching jquery.js"
   get_files("jquery")
+  puts "Fetching modernizr.js"
   get_files("modernizr")
   Dir.chdir(workdir)
-  puts Dir.getwd
+  # puts Dir.getwd
 
+end
+
+def git
+  puts Dir.getwd
+  exec("git init && git add -v . && git commit -m 'initial commit'")
 end
 
 # Project Name
@@ -91,3 +102,4 @@ puts "Enter the project name: "
 project_name = gets.chomp!
 
 create_project(project_name, dirs, partials, sass, js)
+git

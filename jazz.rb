@@ -12,14 +12,22 @@ js = ["custom.js"] # Javascript Files
 
 
 # Methods
-def get_files
-  # Needs switch statement
-  exec("curl -O ") # .gitignore
-  exec("curl -O ") # jquery.min.js
-  exec("curl -O ") # config.rb
-  exec("curl -O ") # index.html
-  exec("curl -O ") # master.scss
-  exec("curl -O ") # Modernizr
+def get_files(filename)
+  case filename
+  when "gitignore"
+    exec("curl -O https://raw.github.com/japellerano/Web-Development-Template/master/.gitignore")
+  when "jquery"
+    exec("curl -O http://code.jquery.com/jquery-2.0.0.min.js")
+  when "config"
+    exec("curl -O https://raw.github.com/japellerano/Web-Development-Template/master/config.rb ")
+  when "index"
+    exec("curl -O https://raw.github.com/japellerano/Web-Development-Template/master/index.html")
+  when "master"
+    exec("curl -O https://raw.github.com/japellerano/Web-Development-Template/master/sass/master.scss")
+  when "modernizr"
+    exec("curl -O https://raw.github.com/japellerano/Web-Development-Template/master/js/modernizr.min.js")
+  end
+  
 end
 
 def create_project(project_name, directories, partials, sass, js)

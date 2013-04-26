@@ -51,6 +51,8 @@ def create_project(project_name, directories, partials, sass, js)
     FileUtils.touch(s)
     puts "Creating #{s}"
   end
+  get_files("master")
+  puts File.exist?("master.scss")
   # puts Dir.getwd
   Dir.mkdir("partials")
   partials.each do |p|
@@ -62,12 +64,17 @@ def create_project(project_name, directories, partials, sass, js)
 
   # Create Files in Main Directory
   FileUtils.touch('README.MD') # README
+  get_files("gitignore")
+  get_files("index")
+  get_files("config")
 
   Dir.chdir("js")
   js.each do |j|
     FileUtils.touch(j)
     puts "Creating #{j}"
   end
+  get_files("jquery")
+  get_files("modernizr")
   Dir.chdir(workdir)
   puts Dir.getwd
 

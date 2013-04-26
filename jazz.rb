@@ -2,6 +2,7 @@
 
 # Requirements
 require 'fileutils'
+require 'open-uri'
 
 # Variables
 template_repo = 'https://github.com/japellerano/Web-Development-Template.git'

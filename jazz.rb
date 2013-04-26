@@ -13,20 +13,24 @@ js = ["custom.js"] # Javascript Files
 
 
 # Methods
+def get_file(file, url)
+  open(file, 'wb').write(open(url).read)
+end
+
 def get_files(filename)
   case filename
   when "gitignore"
-    exec("curl -O https://raw.github.com/japellerano/Web-Development-Template/master/.gitignore")
+    get_file('.gitignore', 'https://raw.github.com/japellerano/Web-Development-Template/master/.gitignore')
   when "jquery"
-    exec("curl -O http://code.jquery.com/jquery-2.0.0.min.js")
+    get_file('jquery-2.0.0.min.js', 'http://code.jquery.com/jquery-2.0.0.min.js')
   when "config"
-    exec("curl -O https://raw.github.com/japellerano/Web-Development-Template/master/config.rb ")
+    get_file('config.rb', 'https://raw.github.com/japellerano/Web-Development-Template/master/config.rb')
   when "index"
-    exec("curl -O https://raw.github.com/japellerano/Web-Development-Template/master/index.html")
+    get_file('index.html', 'https://raw.github.com/japellerano/Web-Development-Template/master/index.html')
   when "master"
-    exec("curl -O https://raw.github.com/japellerano/Web-Development-Template/master/sass/master.scss")
+    get_file('master.scss', 'https://raw.github.com/japellerano/Web-Development-Template/master/sass/master.scss')
   when "modernizr"
-    exec("curl -O https://raw.github.com/japellerano/Web-Development-Template/master/js/modernizr.min.js")
+    get_file('modernizr.min.js', 'https://raw.github.com/japellerano/Web-Development-Template/master/js/modernizr.min.js')
   end
   
 end
@@ -56,6 +60,7 @@ def create_project(project_name, directories, partials, sass, js)
   puts File.exist?("master.scss")
   # puts Dir.getwd
   Dir.mkdir("partials")
+  Dir.chdir("partials")
   partials.each do |p|
     FileUtils.touch(p)
     puts "Creating #{p}"

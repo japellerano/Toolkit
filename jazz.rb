@@ -6,10 +6,10 @@ require 'open-uri'
 
 # Variables
 template_repo = 'https://github.com/japellerano/Web-Development-Template.git'
-dirs = ["sass", "css", "js", "images"] # Directory Layout
-partials = ["_settings.scss", "_functions.scss"] # SASS Partials
-sass = ["ie.scss", "shame.scss"] # SASS Other Files
-js = ["custom.js"] # Javascript Files
+dirs = ["sass", "css", "js", "images"] # Directory Layout Array
+partials = ["_settings.scss", "_functions.scss"] # SASS Partials Array
+sass = ["ie.scss", "shame.scss"] # SASS Other Files Array
+js = ["custom.js"] # Javascript Files Array
 
 
 # Methods
@@ -20,16 +20,22 @@ end
 def get_files(filename)
   case filename
   when "gitignore"
+    puts "Fetching #{filename}"
     get_file('.gitignore', 'https://raw.github.com/japellerano/Web-Development-Template/master/.gitignore')
   when "jquery"
+    puts "Fetching #{filename}"
     get_file('jquery-2.0.0.min.js', 'http://code.jquery.com/jquery-2.0.0.min.js')
   when "config"
+    puts "Fetching #{filename}"
     get_file('config.rb', 'https://raw.github.com/japellerano/Web-Development-Template/master/config.rb')
   when "index"
+    puts "Fetching #{filename}" 
     get_file('index.html', 'https://raw.github.com/japellerano/Web-Development-Template/master/index.html')
   when "master"
+    puts "Fetching #{filename}"
     get_file('master.scss', 'https://raw.github.com/japellerano/Web-Development-Template/master/sass/master.scss')
   when "modernizr"
+    puts "Fetching #{filename}"
     get_file('modernizr.min.js', 'https://raw.github.com/japellerano/Web-Development-Template/master/js/modernizr.min.js')
   end
   
@@ -56,7 +62,6 @@ def create_project(project_name, directories, partials, sass, js)
     FileUtils.touch(s)
     puts "Creating #{s}"
   end
-  puts "Fetching master.scss..."
   get_files("master")
   # puts File.exist?("master.scss")
   # puts Dir.getwd
@@ -71,11 +76,8 @@ def create_project(project_name, directories, partials, sass, js)
 
   # Create Files in Main Directory
   FileUtils.touch('README.MD') # README
-  puts "Fetching .gitignore"
   get_files("gitignore")
-  puts "Fetching index.html"
   get_files("index")
-  puts "Fetching config.rb"
   get_files("config")
 
   Dir.chdir("js")
@@ -83,9 +85,7 @@ def create_project(project_name, directories, partials, sass, js)
     FileUtils.touch(j)
     puts "Creating #{j}"
   end
-  puts "Fetching jquery.js"
   get_files("jquery")
-  puts "Fetching modernizr.js"
   get_files("modernizr")
   Dir.chdir(workdir)
   # puts Dir.getwd

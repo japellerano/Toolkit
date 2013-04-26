@@ -100,6 +100,12 @@ end
 # Project Name
 puts "Enter the project name: "
 project_name = gets.chomp!
-
-create_project(project_name, dirs, partials, sass, js)
-git
+if Dir.exists?(project_name)
+  puts "This project already exists."
+  puts "Please enter a new project name: "
+  project_name = gets.chomp!
+else 
+  create_project(project_name, dirs, partials, sass, js)
+  git
+  puts "Thank you for using Jazz!"
+end

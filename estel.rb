@@ -1,15 +1,12 @@
 #!/usr/bin/env ruby
 
 require 'open-uri'
-require 'uri'
 
 filename = 'master.zip'
 stream = 'https://github.com/japellerano/Web-Development-Template/archive/master.zip'
 
 # Methods
 def separate_url(url)
-  uri = URI(url)
-
   s = url.split("/")
   l = s.length
   return s[l - 1]
